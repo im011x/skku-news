@@ -16,12 +16,29 @@ from config import GEMINI_API_KEY
 
 import db
 
+# 정적 파일 디렉토리: Vercel 배포 환경 대응
+# Vercel에서는 __file__ 경로가 다를 수 있으므로 절대 경로 사용
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+# Vercel 환경에서도 작동하도록 경로 확인
+if not STATIC_DIR.exists():
+    # 대체 경로 시도
+    alt_path = Path(__file__).resolve().parent.parent.parent / "backend" / "static"
+    if alt_path.exists():
+        STATIC_DIR = alt_path
 
 app = FastAPI(title="구글 뉴스 챗봇 API")
+
+# CORS 설정: 환경 변수로 허용된 오리진 관리 (Vercel 배포 대응)
+import os
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*")
+if ALLOWED_ORIGINS == "*":
+    origins = ["*"]
+else:
+    origins = [origin.strip() for origin in ALLOWED_ORIGINS.split(",")]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

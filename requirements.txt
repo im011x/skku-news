@@ -1,0 +1,9 @@
+# Vercel 배포용 requirements.txt (프로젝트 루트)
+# backend/requirements.txt와 동일한 내용
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+httpx>=0.26.0
+python-dotenv>=1.0.0
+google-genai>=1.0.0
+feedparser>=6.0.0
+supabase>=2.0.0
