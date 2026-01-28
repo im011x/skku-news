@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>구글 뉴스 챗봇</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>구글 뉴스 챗봇</h1>
+      <p>키워드로 뉴스를 검색하고, 요약·채팅으로 이야기해 보세요. <a href="/docs" target="_blank" rel="noopener" style="color: var(--accent);">API 문서</a></p>
+    </header>
+
+    <section class="search-section">
+      <div class="search-input-wrap">
+        <input type="text" id="search-input" placeholder="검색 키워드 입력" autocomplete="off">
+      </div>
+      <select id="sort-select" class="sort-select">
+        <option value="date">최신순</option>
+        <option value="sim">인기순</option>
+      </select>
+      <button type="button" id="btn-search" class="btn-search">검색</button>
+    </section>
+
+    <div id="error-box" class="error hidden"></div>
+    <div id="loading-news" class="loading hidden">검색 중…</div>
+    
+    <section id="db-log-section" class="db-log-section hidden">
+      <h3>DB 저장 로그</h3>
+      <div id="db-log-list" class="db-log-list"></div>
+    </section>
+
+    <section id="summary-section" class="summary-section hidden">
+      <h3>검색 결과 요약</h3>
+      <p id="summary-text" class="summary-text"></p>
+    </section>
+
+    <section id="news-section" class="news-section hidden">
+      <h2 id="news-count"></h2>
+      <ul id="news-list" class="news-list"></ul>
+    </section>
+
+    <section class="chat-section">
+      <h2>뉴스 기반 대화</h2>
+      <div id="chat-messages" class="chat-messages">
+        <div class="empty">검색한 뉴스에 대해 질문해 보세요. 먼저 키워드로 뉴스를 검색해야 합니다.</div>
+      </div>
+      <form id="chat-form" class="chat-form" action="#" method="post">
+        <input type="text" id="chat-input" placeholder="질문 입력 후 Enter" autocomplete="off">
+        <button type="button" id="btn-send">전송</button>
+      </form>
+    </section>
+  </div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
